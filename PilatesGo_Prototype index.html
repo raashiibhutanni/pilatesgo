@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PilatesGo — Pilates for Every Indian City</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sage: #7C9A7E;
+    --sage-light: #EEF3EE;
+    --sage-dark: #3D5C3F;
+    --cream: #FAF7F2;
+    --warm: #F0E8DA;
+    --clay: #C4845A;
+    --clay-light: #F5E6DB;
+    --charcoal: #2C2C2C;
+    --muted: #7A7A7A;
+    --white: #FFFFFF;
+    --border: rgba(0,0,0,0.08);
+    --shadow: 0 4px 24px rgba(0,0,0,0.07);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    overflow-x: hidden;
+  }
+
+  /* ─── SCREENS ─── */
+  .screen { display: none; min-height: 100vh; }
+  .screen.active { display: block; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(250,247,242,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; color: var(--sage-dark);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .logo-dot { width: 8px; height: 8px; background: var(--clay); border-radius: 50%; }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a {
+    font-size: 14px; color: var(--muted); text-decoration: none;
+    cursor: pointer; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--charcoal); }
+  .nav-cta {
+    background: var(--sage-dark); color: white !important;
+    padding: 8px 20px; border-radius: 100px;
+    font-size: 13px; font-weight: 500;
+  }
+  .nav-cta:hover { background: var(--sage) !important; color: white !important; }
+
+  /* ─── HERO ─── */
+  .hero {
+    padding-top: 64px;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 0;
+  }
+  .hero-left {
+    padding: 80px 5% 80px 8%;
+    position: relative;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--sage-light); color: var(--sage-dark);
+    font-size: 12px; font-weight: 500; letter-spacing: 0.04em;
+    padding: 6px 14px; border-radius: 100px;
+    margin-bottom: 28px;
+  }
+  .hero-tag span { width: 6px; height: 6px; background: var(--sage); border-radius: 50%; }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(38px, 4vw, 56px);
+    line-height: 1.15;
+    color: var(--charcoal);
+    margin-bottom: 20px;
+  }
+  h1 em { color: var(--sage-dark); font-style: italic; }
+  .hero-sub {
+    font-size: 17px; line-height: 1.7; color: var(--muted);
+    max-width: 460px; margin-bottom: 40px;
+  }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--sage-dark); color: white;
+    padding: 14px 28px; border-radius: 100px;
+    font-size: 15px; font-weight: 500; border: none;
+    cursor: pointer; transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: var(--sage); transform: translateY(-1px); }
+  .btn-secondary {
+    background: transparent; color: var(--charcoal);
+    padding: 14px 28px; border-radius: 100px;
+    font-size: 15px; font-weight: 500;
+    border: 1.5px solid var(--border);
+    cursor: pointer; transition: all 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--charcoal); }
+  .hero-stats {
+    display: flex; gap: 32px; margin-top: 48px;
+    padding-top: 32px; border-top: 1px solid var(--border);
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; color: var(--charcoal); font-weight: 600;
+  }
+  .stat-label { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  .hero-right {
+    background: var(--warm);
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    padding: 80px 40px;
+  }
+  .hero-card {
+    background: white;
+    border-radius: 24px;
+    padding: 28px;
+    width: 300px;
+    box-shadow: var(--shadow);
+    position: relative; z-index: 2;
+  }
+  .hero-card-header {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+  }
+  .instructor-avatar {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--sage-light), var(--sage));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+  }
+  .instructor-name { font-weight: 500; font-size: 15px; }
+  .instructor-loc { font-size: 12px; color: var(--muted); }
+  .live-badge {
+    margin-left: auto; background: #FEE2E2; color: #DC2626;
+    font-size: 11px; font-weight: 500; padding: 3px 10px;
+    border-radius: 100px; display: flex; align-items: center; gap: 4px;
+  }
+  .live-dot { width: 6px; height: 6px; background: #DC2626; border-radius: 50%; animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+  .session-info {
+    background: var(--sage-light); border-radius: 12px; padding: 14px;
+    margin-bottom: 16px;
+  }
+  .session-title { font-weight: 500; font-size: 14px; margin-bottom: 4px; }
+  .session-meta { font-size: 12px; color: var(--muted); }
+  .progress-bar {
+    background: var(--border); border-radius: 100px;
+    height: 6px; margin: 12px 0 6px; overflow: hidden;
+  }
+  .progress-fill { height: 100%; background: var(--sage); border-radius: 100px; width: 65%; }
+  .progress-label { font-size: 11px; color: var(--muted); }
+  .floating-card {
+    position: absolute; background: white; border-radius: 16px;
+    padding: 12px 16px; box-shadow: var(--shadow);
+    display: flex; align-items: center; gap: 10px;
+    font-size: 13px;
+  }
+  .fc-1 { top: 15%; right: 5%; }
+  .fc-2 { bottom: 20%; left: 2%; }
+  .fc-icon { font-size: 20px; }
+  .fc-text strong { display: block; font-size: 13px; }
+  .fc-text span { font-size: 11px; color: var(--muted); }
+  .bg-circle {
+    position: absolute; border-radius: 50%;
+    background: rgba(124,154,126,0.12);
+  }
+  .bc1 { width: 300px; height: 300px; top: -60px; right: -60px; }
+  .bc2 { width: 200px; height: 200px; bottom: 40px; left: -40px; }
+
+  /* ─── SECTION COMMON ─── */
+  section { padding: 80px 8%; }
+  .section-tag {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--sage-dark);
+    margin-bottom: 12px;
+  }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 3vw, 40px); line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .section-sub { font-size: 17px; color: var(--muted); line-height: 1.7; max-width: 540px; }
+
+  /* ─── HOW IT WORKS ─── */
+  .how-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px; margin-top: 56px;
+  }
+  .step-card {
+    background: white; border-radius: 20px; padding: 28px;
+    border: 1px solid var(--border);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .step-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+  .step-num {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: var(--sage-light); color: var(--sage-dark);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 600; font-size: 14px; margin-bottom: 16px;
+  }
+  .step-title { font-weight: 500; font-size: 16px; margin-bottom: 8px; }
+  .step-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+  /* ─── INSTRUCTORS PAGE ─── */
+  .instructors-hero {
+    padding: 120px 8% 60px;
+    background: var(--warm);
+  }
+  .filter-bar {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    padding: 0 8%; margin-bottom: 40px; margin-top: 32px;
+  }
+  .filter-chip {
+    padding: 8px 18px; border-radius: 100px;
+    font-size: 13px; border: 1.5px solid var(--border);
+    background: white; cursor: pointer; transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .filter-chip.active, .filter-chip:hover {
+    background: var(--sage-dark); color: white; border-color: var(--sage-dark);
+  }
+  .instructors-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px; padding: 0 8% 80px;
+  }
+  .instructor-card {
+    background: white; border-radius: 20px; overflow: hidden;
+    border: 1px solid var(--border);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .instructor-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+  .ic-header {
+    background: var(--warm); padding: 28px;
+    display: flex; align-items: flex-start; gap: 16px;
+  }
+  .ic-avatar {
+    width: 60px; height: 60px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; border: 3px solid white;
+  }
+  .ic-name { font-weight: 500; font-size: 17px; }
+  .ic-city { font-size: 13px; color: var(--muted); margin: 2px 0 8px; }
+  .ic-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .ic-tag {
+    background: white; font-size: 11px; color: var(--sage-dark);
+    padding: 3px 10px; border-radius: 100px; font-weight: 500;
+  }
+  .ic-body { padding: 20px 28px; }
+  .ic-rating {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 14px; margin-bottom: 12px;
+  }
+  .stars { color: #F59E0B; letter-spacing: -2px; }
+  .ic-stats {
+    display: flex; gap: 24px; margin-bottom: 16px;
+    padding-bottom: 16px; border-bottom: 1px solid var(--border);
+  }
+  .ic-stat-num { font-weight: 500; font-size: 18px; }
+  .ic-stat-label { font-size: 11px; color: var(--muted); }
+  .ic-price {
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .price-val { font-size: 20px; font-weight: 500; }
+  .price-sub { font-size: 12px; color: var(--muted); }
+  .book-btn {
+    background: var(--sage-dark); color: white;
+    border: none; padding: 10px 20px; border-radius: 100px;
+    font-size: 13px; font-weight: 500; cursor: pointer;
+    transition: background 0.2s; font-family: 'DM Sans', sans-serif;
+  }
+  .book-btn:hover { background: var(--sage); }
+
+  /* ─── BOOKING PAGE ─── */
+  .booking-page {
+    padding: 100px 8% 80px;
+    display: grid; grid-template-columns: 1fr 380px; gap: 48px;
+    align-items: start; max-width: 1100px; margin: 0 auto;
+  }
+  .booking-section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px; color: var(--muted); margin-bottom: 20px;
+    padding-bottom: 12px; border-bottom: 1px solid var(--border);
+  }
+  .program-cards { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+  .program-card {
+    border: 1.5px solid var(--border); border-radius: 16px; padding: 18px 20px;
+    cursor: pointer; transition: all 0.2s; display: flex;
+    align-items: center; gap: 16px;
+  }
+  .program-card.selected { border-color: var(--sage-dark); background: var(--sage-light); }
+  .program-card:hover { border-color: var(--sage); }
+  .program-radio {
+    width: 20px; height: 20px; border-radius: 50%;
+    border: 2px solid var(--border); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .program-card.selected .program-radio {
+    border-color: var(--sage-dark); background: var(--sage-dark);
+  }
+  .program-card.selected .program-radio::after {
+    content: ''; width: 8px; height: 8px; background: white; border-radius: 50%;
+  }
+  .program-info { flex: 1; }
+  .program-name { font-weight: 500; font-size: 15px; margin-bottom: 3px; }
+  .program-desc { font-size: 13px; color: var(--muted); }
+  .program-price { font-weight: 500; font-size: 16px; color: var(--sage-dark); }
+
+  .slot-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+    margin-bottom: 32px;
+  }
+  .slot {
+    padding: 10px; border-radius: 10px; text-align: center;
+    border: 1.5px solid var(--border); cursor: pointer;
+    font-size: 13px; transition: all 0.2s;
+  }
+  .slot:hover { border-color: var(--sage); }
+  .slot.selected { background: var(--sage-dark); color: white; border-color: var(--sage-dark); }
+  .slot.unavailable { opacity: 0.35; cursor: not-allowed; }
+
+  .form-group { margin-bottom: 16px; }
+  .form-label { font-size: 13px; color: var(--muted); margin-bottom: 6px; display: block; }
+  .form-input {
+    width: 100%; padding: 12px 16px; border-radius: 12px;
+    border: 1.5px solid var(--border); font-size: 15px;
+    font-family: 'DM Sans', sans-serif; background: white;
+    transition: border-color 0.2s; outline: none;
+  }
+  .form-input:focus { border-color: var(--sage); }
+
+  .booking-summary {
+    background: white; border-radius: 20px; padding: 28px;
+    border: 1px solid var(--border); position: sticky; top: 80px;
+  }
+  .summary-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; margin-bottom: 20px;
+  }
+  .summary-instructor {
+    display: flex; align-items: center; gap: 12px;
+    padding-bottom: 16px; margin-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .si-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--warm); display: flex; align-items: center;
+    justify-content: center; font-size: 20px;
+  }
+  .si-name { font-weight: 500; font-size: 14px; }
+  .si-spec { font-size: 12px; color: var(--muted); }
+  .summary-row {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 14px; margin-bottom: 10px;
+  }
+  .summary-row.total {
+    border-top: 1px solid var(--border); margin-top: 12px;
+    padding-top: 12px; font-weight: 500; font-size: 16px;
+  }
+  .summary-row span:first-child { color: var(--muted); }
+  .trial-badge {
+    background: var(--clay-light); color: var(--clay);
+    font-size: 12px; padding: 3px 10px; border-radius: 100px;
+    font-weight: 500;
+  }
+  .confirm-btn {
+    width: 100%; background: var(--sage-dark); color: white;
+    border: none; padding: 16px; border-radius: 100px;
+    font-size: 15px; font-weight: 500; cursor: pointer;
+    margin-top: 20px; transition: background 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .confirm-btn:hover { background: var(--sage); }
+  .upi-note {
+    text-align: center; font-size: 12px; color: var(--muted);
+    margin-top: 10px; display: flex; align-items: center;
+    justify-content: center; gap: 4px;
+  }
+
+  /* ─── SUCCESS PAGE ─── */
+  .success-page {
+    min-height: 100vh; display: flex; align-items: center;
+    justify-content: center; padding: 80px 5%;
+    background: var(--cream);
+  }
+  .success-card {
+    background: white; border-radius: 28px; padding: 48px 40px;
+    max-width: 480px; width: 100%; text-align: center;
+    border: 1px solid var(--border);
+  }
+  .success-icon {
+    width: 72px; height: 72px; background: var(--sage-light);
+    border-radius: 50%; display: flex; align-items: center;
+    justify-content: center; font-size: 32px; margin: 0 auto 24px;
+  }
+  .success-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; margin-bottom: 10px;
+  }
+  .success-sub { font-size: 16px; color: var(--muted); line-height: 1.6; margin-bottom: 28px; }
+  .whatsapp-box {
+    background: #F0FDF4; border: 1.5px solid #BBF7D0;
+    border-radius: 16px; padding: 16px 20px; margin-bottom: 24px;
+    text-align: left;
+  }
+  .wa-title { font-size: 13px; font-weight: 500; color: #166534; margin-bottom: 4px; }
+  .wa-sub { font-size: 13px; color: #4B7A5C; line-height: 1.5; }
+  .next-steps { text-align: left; margin-bottom: 28px; }
+  .ns-title { font-size: 13px; font-weight: 500; color: var(--muted); margin-bottom: 12px; }
+  .ns-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 14px; margin-bottom: 10px; line-height: 1.5;
+  }
+  .ns-dot {
+    width: 20px; height: 20px; border-radius: 50%;
+    background: var(--sage-light); color: var(--sage-dark);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 600; flex-shrink: 0; margin-top: 2px;
+  }
+  .back-btn {
+    background: var(--sage-dark); color: white; border: none;
+    padding: 14px 32px; border-radius: 100px; font-size: 15px;
+    font-weight: 500; cursor: pointer; transition: background 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .back-btn:hover { background: var(--sage); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { min-height: 400px; }
+    .booking-page { grid-template-columns: 1fr; }
+    .nav-links a:not(.nav-cta) { display: none; }
+    .fc-1, .fc-2 { display: none; }
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .screen.active .hero-left > * { animation: fadeUp 0.5s ease both; }
+  .screen.active .hero-left > *:nth-child(2) { animation-delay: 0.1s; }
+  .screen.active .hero-left > *:nth-child(3) { animation-delay: 0.2s; }
+  .screen.active .hero-left > *:nth-child(4) { animation-delay: 0.3s; }
+  .screen.active .hero-left > *:nth-child(5) { animation-delay: 0.4s; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    <div class="logo-dot"></div>
+    PilatesGo
+  </div>
+  <div class="nav-links">
+    <a onclick="show('home')">Home</a>
+    <a onclick="show('instructors')">Instructors</a>
+    <a onclick="show('instructors')" class="nav-cta">Book a Trial — ₹199</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════
+     SCREEN 1: HOME
+════════════════════════════════════════ -->
+<div id="home" class="screen active">
+  <section style="padding:0">
+    <div class="hero">
+      <div class="hero-left">
+        <div class="hero-tag"><span></span> Now in 12 tier-2 cities</div>
+        <h1>Pilates that <em>comes to you,</em> wherever you are</h1>
+        <p class="hero-sub">Certified instructors. Structured 4-week programs. Starts at ₹599/month. Built for working women in Jaipur, Indore, Lucknow — not just Mumbai.</p>
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="show('instructors')">
+            Book a ₹199 trial →
+          </button>
+          <button class="btn-secondary" onclick="show('instructors')">
+            Browse instructors
+          </button>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="stat-num">500+</div>
+            <div class="stat-label">Certified instructors</div>
+          </div>
+          <div>
+            <div class="stat-num">12</div>
+            <div class="stat-label">Cities live</div>
+          </div>
+          <div>
+            <div class="stat-num">₹599</div>
+            <div class="stat-label">Starting/month</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="bg-circle bc1"></div>
+        <div class="bg-circle bc2"></div>
+
+        <div class="floating-card fc-1">
+          <div class="fc-icon">🎯</div>
+          <div class="fc-text">
+            <strong>Week 3 complete</strong>
+            <span>Core strength +40%</span>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="hero-card-header">
+            <div class="instructor-avatar">🧘</div>
+            <div>
+              <div class="instructor-name">Kavya Sharma</div>
+              <div class="instructor-loc">📍 Jaipur · STOTT certified</div>
+            </div>
+            <div class="live-badge">
+              <div class="live-dot"></div> LIVE
+            </div>
+          </div>
+          <div class="session-info">
+            <div class="session-title">Postpartum Core — Week 2</div>
+            <div class="session-meta">Today, 7:00 AM · 45 min · 6 participants</div>
+          </div>
+          <div class="progress-bar"><div class="progress-fill"></div></div>
+          <div class="progress-label">Week 2 of 4 · 65% complete</div>
+        </div>
+
+        <div class="floating-card fc-2">
+          <div class="fc-icon">⭐</div>
+          <div class="fc-text">
+            <strong>4.9 avg rating</strong>
+            <span>1,200+ sessions done</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section style="background: white;">
+    <div class="section-tag">How it works</div>
+    <h2>From quiz to first session<br>in under 10 minutes</h2>
+    <p class="section-sub">No gym. No commute. No guesswork about what's safe for your body.</p>
+    <div class="how-grid">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <div class="step-title">Take the 2-min quiz</div>
+        <div class="step-desc">Tell us your goal, fitness level, and any health considerations like postpartum or back pain.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <div class="step-title">Get matched to an instructor</div>
+        <div class="step-desc">We surface certified instructors who specialise in exactly your goal — not a random algorithm.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <div class="step-title">Book a ₹199 trial</div>
+        <div class="step-desc">A 45-min live session over video. Pay via UPI. No subscription until you're sure.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">04</div>
+        <div class="step-title">Start your 4-week program</div>
+        <div class="step-desc">3 live sessions/week + daily WhatsApp check-ins. Progress that you can actually feel.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO IT'S FOR -->
+  <section>
+    <div class="section-tag">Who it's for</div>
+    <h2>Three women.<br>One product.</h2>
+    <div class="how-grid" style="margin-top:40px">
+      <div class="step-card" style="border-top: 3px solid var(--sage);">
+        <div style="font-size:28px;margin-bottom:12px">💼</div>
+        <div class="step-title">Priya, 28 · Indore</div>
+        <div class="step-desc">Software engineer with chronic back pain from 9hrs at a desk. Wants structured, safe movement before work.</div>
+      </div>
+      <div class="step-card" style="border-top: 3px solid var(--clay);">
+        <div style="font-size:28px;margin-bottom:12px">🌸</div>
+        <div class="step-title">Ananya, 32 · Pune</div>
+        <div class="step-desc">6 months postpartum. Needs certified guidance on what's safe — not generic YouTube videos.</div>
+      </div>
+      <div class="step-card" style="border-top: 3px solid var(--sage-dark);">
+        <div style="font-size:28px;margin-bottom:12px">✨</div>
+        <div class="step-title">Zara, 22 · Chandigarh</div>
+        <div class="step-desc">Gen Z student who discovers everything on Instagram but never sticks to anything past Day 5.</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SCREEN 2: INSTRUCTORS
+════════════════════════════════════════ -->
+<div id="instructors" class="screen">
+  <div class="instructors-hero">
+    <div class="section-tag">Find your instructor</div>
+    <h2>Real instructors.<br>Real certifications.</h2>
+    <p class="section-sub">Every instructor is STOTT or APPI certified. Browse by city, specialisation, or price.</p>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-chip active">All</button>
+    <button class="filter-chip">Back pain</button>
+    <button class="filter-chip">Postpartum</button>
+    <button class="filter-chip">Beginner</button>
+    <button class="filter-chip">Morning slots</button>
+    <button class="filter-chip">Under ₹799/mo</button>
+  </div>
+
+  <div class="instructors-grid">
+
+    <div class="instructor-card">
+      <div class="ic-header">
+        <div class="ic-avatar" style="background:linear-gradient(135deg,#EEF3EE,#7C9A7E)">🧘</div>
+        <div>
+          <div class="ic-name">Kavya Sharma</div>
+          <div class="ic-city">📍 Jaipur · STOTT Certified</div>
+          <div class="ic-tags">
+            <span class="ic-tag">Postpartum</span>
+            <span class="ic-tag">Core rehab</span>
+          </div>
+        </div>
+      </div>
+      <div class="ic-body">
+        <div class="ic-rating">
+          <span class="stars">★★★★★</span>
+          <span><strong>4.9</strong> · 142 reviews</span>
+        </div>
+        <div class="ic-stats">
+          <div><div class="ic-stat-num">340</div><div class="ic-stat-label">Sessions</div></div>
+          <div><div class="ic-stat-num">4 yrs</div><div class="ic-stat-label">Experience</div></div>
+          <div><div class="ic-stat-num">94%</div><div class="ic-stat-label">Complete rate</div></div>
+        </div>
+        <div class="ic-price">
+          <div>
+            <div class="price-val">₹799<span style="font-size:13px;color:var(--muted);font-weight:400">/month</span></div>
+            <div class="price-sub">Trial at ₹199</div>
+          </div>
+          <button class="book-btn" onclick="show('booking')">Book trial</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="instructor-card">
+      <div class="ic-header">
+        <div class="ic-avatar" style="background:linear-gradient(135deg,#F5E6DB,#C4845A)">🌿</div>
+        <div>
+          <div class="ic-name">Meera Iyer</div>
+          <div class="ic-city">📍 Lucknow · APPI Certified</div>
+          <div class="ic-tags">
+            <span class="ic-tag">Back pain</span>
+            <span class="ic-tag">Beginners</span>
+          </div>
+        </div>
+      </div>
+      <div class="ic-body">
+        <div class="ic-rating">
+          <span class="stars">★★★★★</span>
+          <span><strong>4.8</strong> · 98 reviews</span>
+        </div>
+        <div class="ic-stats">
+          <div><div class="ic-stat-num">210</div><div class="ic-stat-label">Sessions</div></div>
+          <div><div class="ic-stat-num">3 yrs</div><div class="ic-stat-label">Experience</div></div>
+          <div><div class="ic-stat-num">91%</div><div class="ic-stat-label">Complete rate</div></div>
+        </div>
+        <div class="ic-price">
+          <div>
+            <div class="price-val">₹599<span style="font-size:13px;color:var(--muted);font-weight:400">/month</span></div>
+            <div class="price-sub">Trial at ₹199</div>
+          </div>
+          <button class="book-btn" onclick="show('booking')">Book trial</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="instructor-card">
+      <div class="ic-header">
+        <div class="ic-avatar" style="background:linear-gradient(135deg,#EEEDFE,#534AB7)">💫</div>
+        <div>
+          <div class="ic-name">Riya Kapoor</div>
+          <div class="ic-city">📍 Indore · STOTT Certified</div>
+          <div class="ic-tags">
+            <span class="ic-tag">Gen Z friendly</span>
+            <span class="ic-tag">Flexibility</span>
+          </div>
+        </div>
+      </div>
+      <div class="ic-body">
+        <div class="ic-rating">
+          <span class="stars">★★★★★</span>
+          <span><strong>4.9</strong> · 76 reviews</span>
+        </div>
+        <div class="ic-stats">
+          <div><div class="ic-stat-num">180</div><div class="ic-stat-label">Sessions</div></div>
+          <div><div class="ic-stat-num">2 yrs</div><div class="ic-stat-label">Experience</div></div>
+          <div><div class="ic-stat-num">89%</div><div class="ic-stat-label">Complete rate</div></div>
+        </div>
+        <div class="ic-price">
+          <div>
+            <div class="price-val">₹699<span style="font-size:13px;color:var(--muted);font-weight:400">/month</span></div>
+            <div class="price-sub">Trial at ₹199</div>
+          </div>
+          <button class="book-btn" onclick="show('booking')">Book trial</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SCREEN 3: BOOKING
+════════════════════════════════════════ -->
+<div id="booking" class="screen">
+  <div class="booking-page">
+    <div>
+      <h2 style="margin-bottom:6px">Book your trial</h2>
+      <p style="color:var(--muted);font-size:15px;margin-bottom:36px">with Kavya Sharma · Jaipur</p>
+
+      <!-- Program select -->
+      <div class="booking-section-title">Choose your program</div>
+      <div class="program-cards">
+        <div class="program-card selected" onclick="selectProgram(this)">
+          <div class="program-radio"></div>
+          <div class="program-info">
+            <div class="program-name">Trial Session</div>
+            <div class="program-desc">1 live session · 45 mins · No commitment</div>
+          </div>
+          <div class="program-price">₹199</div>
+        </div>
+        <div class="program-card" onclick="selectProgram(this)">
+          <div class="program-radio"></div>
+          <div class="program-info">
+            <div class="program-name">4-Week Starter</div>
+            <div class="program-desc">3 sessions/week · Progress tracking · WhatsApp check-ins</div>
+          </div>
+          <div class="program-price">₹799/mo</div>
+        </div>
+        <div class="program-card" onclick="selectProgram(this)">
+          <div class="program-radio"></div>
+          <div class="program-info">
+            <div class="program-name">Postpartum Recovery</div>
+            <div class="program-desc">Specialised 6-week program · OB-GYN approved</div>
+          </div>
+          <div class="program-price">₹999/mo</div>
+        </div>
+      </div>
+
+      <!-- Slot picker -->
+      <div class="booking-section-title">Pick a time slot</div>
+      <div class="slot-grid">
+        <div class="slot" onclick="selectSlot(this)">6:00 AM</div>
+        <div class="slot selected" onclick="selectSlot(this)">7:00 AM</div>
+        <div class="slot" onclick="selectSlot(this)">8:00 AM</div>
+        <div class="slot unavailable">9:00 AM</div>
+        <div class="slot" onclick="selectSlot(this)">5:00 PM</div>
+        <div class="slot" onclick="selectSlot(this)">6:00 PM</div>
+        <div class="slot" onclick="selectSlot(this)">7:00 PM</div>
+        <div class="slot unavailable">8:00 PM</div>
+        <div class="slot" onclick="selectSlot(this)">9:00 AM Sat</div>
+      </div>
+
+      <!-- User details -->
+      <div class="booking-section-title">Your details</div>
+      <div class="form-group">
+        <label class="form-label">Full name</label>
+        <input class="form-input" type="text" placeholder="Priya Sharma">
+      </div>
+      <div class="form-group">
+        <label class="form-label">WhatsApp number</label>
+        <input class="form-input" type="tel" placeholder="+91 98765 43210">
+      </div>
+      <div class="form-group">
+        <label class="form-label">City</label>
+        <input class="form-input" type="text" placeholder="Jaipur, Indore, Lucknow...">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Health notes (optional)</label>
+        <input class="form-input" type="text" placeholder="e.g. 4 months postpartum, lower back pain">
+      </div>
+    </div>
+
+    <!-- Summary sidebar -->
+    <div>
+      <div class="booking-summary">
+        <div class="summary-title">Booking summary</div>
+        <div class="summary-instructor">
+          <div class="si-avatar">🧘</div>
+          <div>
+            <div class="si-name">Kavya Sharma</div>
+            <div class="si-spec">Postpartum · Core rehab · Jaipur</div>
+          </div>
+        </div>
+        <div class="summary-row">
+          <span>Session</span>
+          <span>Trial · 45 min</span>
+        </div>
+        <div class="summary-row">
+          <span>Time</span>
+          <span>7:00 AM, Tomorrow</span>
+        </div>
+        <div class="summary-row">
+          <span>Format</span>
+          <span>Google Meet</span>
+        </div>
+        <div class="summary-row">
+          <span>Follow-up</span>
+          <span>WhatsApp program</span>
+        </div>
+        <div class="summary-row">
+          <span>Price</span>
+          <span class="trial-badge">Trial ₹199</span>
+        </div>
+        <div class="summary-row total">
+          <span>Total</span>
+          <span>₹199</span>
+        </div>
+        <button class="confirm-btn" onclick="show('success')">
+          Confirm & Pay via UPI →
+        </button>
+        <div class="upi-note">🔒 Secured · GPay / PhonePe / Paytm</div>
+      </div>
+      <div style="margin-top:16px;padding:16px;background:var(--sage-light);border-radius:16px;font-size:13px;color:var(--sage-dark);line-height:1.6">
+        <strong>Free cancellation</strong> up to 2 hours before. Full refund via UPI within 24 hours.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SCREEN 4: SUCCESS
+════════════════════════════════════════ -->
+<div id="success" class="screen">
+  <div class="success-page">
+    <div class="success-card">
+      <div class="success-icon">✅</div>
+      <div class="success-title">You're booked!</div>
+      <p class="success-sub">Your trial with Kavya Sharma is confirmed for tomorrow at 7:00 AM. Check your WhatsApp for the Google Meet link.</p>
+
+      <div class="whatsapp-box">
+        <div class="wa-title">💬 WhatsApp message sent to your number</div>
+        <div class="wa-sub">"Hi! I'm Kavya. Looking forward to our session tomorrow at 7 AM. Here's your Meet link: meet.google.com/xxx-xxxx. Please wear comfortable clothes and have a mat ready 🙏"</div>
+      </div>
+
+      <div class="next-steps">
+        <div class="ns-title">WHAT HAPPENS NEXT</div>
+        <div class="ns-item">
+          <div class="ns-dot">1</div>
+          <div>Tomorrow at 7 AM — join the Google Meet link sent on WhatsApp</div>
+        </div>
+        <div class="ns-item">
+          <div class="ns-dot">2</div>
+          <div>After your session, Kavya sends your personalised 4-week program</div>
+        </div>
+        <div class="ns-item">
+          <div class="ns-dot">3</div>
+          <div>Decide if you want to continue — no pressure, no auto-charge</div>
+        </div>
+      </div>
+
+      <button class="back-btn" onclick="show('home')">← Back to home</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function show(screenId) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(screenId).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function selectProgram(el) {
+  document.querySelectorAll('.program-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function selectSlot(el) {
+  if (el.classList.contains('unavailable')) return;
+  document.querySelectorAll('.slot').forEach(s => s.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+document.querySelectorAll('.filter-chip').forEach(chip => {
+  chip.addEventListener('click', function() {
+    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
