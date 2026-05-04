@@ -476,6 +476,8 @@
   <div class="nav-links">
     <a onclick="show('home')">Home</a>
     <a onclick="show('instructors')">Instructors</a>
+    <a onclick="show('bizmodel')" style="color:var(--clay)">💰 Business Model</a>
+    <a onclick="show('pmdecision')" style="color:var(--sage-dark)">🧠 PM Decision</a>
     <a onclick="show('instructors')" class="nav-cta">Book a Trial — ₹199</a>
   </div>
 </nav>
@@ -880,6 +882,252 @@
       </div>
 
       <button class="back-btn" onclick="show('home')">← Back to home</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SCREEN 5: BUSINESS MODEL
+════════════════════════════════════════ -->
+<div id="bizmodel" class="screen">
+  <div style="padding-top:64px">
+
+    <!-- Header -->
+    <div style="background:var(--charcoal);padding:64px 8% 72px;position:relative;overflow:hidden">
+      <div style="position:absolute;top:-80px;right:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(196,132,90,0.18) 0%,transparent 70%);border-radius:50%"></div>
+      <div style="font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--clay);margin-bottom:14px">Business Model</div>
+      <div style="font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,46px);color:white;line-height:1.15;max-width:600px;margin-bottom:16px">How PilatesGo makes money — <em style="color:var(--clay)">without burning it</em></div>
+      <div style="font-size:16px;color:rgba(255,255,255,0.5);max-width:500px;line-height:1.7">A freemium + commission hybrid. Each layer is designed to solve a different problem: acquisition, conversion, and retention — in that order.</div>
+    </div>
+
+    <!-- Revenue layers -->
+    <div style="padding:56px 8%;background:white">
+      <div style="font-size:13px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:32px">Three revenue layers</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-bottom:56px">
+
+        <div style="border-radius:20px;border:1.5px solid var(--border);padding:28px;position:relative;overflow:hidden">
+          <div style="position:absolute;top:0;left:0;right:0;height:4px;background:var(--clay)"></div>
+          <div style="font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--clay);margin-bottom:12px">Layer 1 — Acquisition</div>
+          <div style="font-family:'Playfair Display',serif;font-size:22px;margin-bottom:6px">₹199 Trial</div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:16px">One-time trial session. Lowers the commitment barrier to near-zero. Goal is not profit — it's to get the user on a mat with a certified instructor.</div>
+          <div style="background:var(--clay-light);border-radius:10px;padding:10px 14px;font-size:12px;color:var(--clay)">
+            <strong>PM logic:</strong> The ₹199 price point isn't about revenue. It's about filtering casual browsers from genuine intent. Free would get volume. ₹199 gets users who will actually show up.
+          </div>
+        </div>
+
+        <div style="border-radius:20px;border:1.5px solid var(--border);padding:28px;position:relative;overflow:hidden">
+          <div style="position:absolute;top:0;left:0;right:0;height:4px;background:var(--sage-dark)"></div>
+          <div style="font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--sage-dark);margin-bottom:12px">Layer 2 — Commission</div>
+          <div style="font-family:'Playfair Display',serif;font-size:22px;margin-bottom:6px">20% per session</div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:16px">Platform takes 20% of every session booked. Instructor earns ₹480–640 per session on a ₹599–799 booking. No upfront cost to instructors — they only pay when they earn.</div>
+          <div style="background:var(--sage-light);border-radius:10px;padding:10px 14px;font-size:12px;color:var(--sage-dark)">
+            <strong>PM logic:</strong> Commission aligns incentives — we only make money when instructors do. This is critical for early supply-side trust. Instructors join because there's no downside.
+          </div>
+        </div>
+
+        <div style="border-radius:20px;border:1.5px solid var(--border);padding:28px;position:relative;overflow:hidden">
+          <div style="position:absolute;top:0;left:0;right:0;height:4px;background:#2C2C2C"></div>
+          <div style="font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--charcoal);margin-bottom:12px">Layer 3 — Subscription</div>
+          <div style="font-family:'Playfair Display',serif;font-size:22px;margin-bottom:6px">₹599–999/month</div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:16px">Unlocked after 2+ sessions. Includes 3 live sessions/week, WhatsApp check-ins, and progress tracking. Predictable recurring revenue. Where LTV actually builds.</div>
+          <div style="background:#F5F5F5;border-radius:10px;padding:10px 14px;font-size:12px;color:var(--charcoal)">
+            <strong>PM logic:</strong> Don't push subscription on Day 1. Let the trial prove value. Subscription pitched after session 2 — when the user has felt the difference from YouTube.
+          </div>
+        </div>
+      </div>
+
+      <!-- Unit economics -->
+      <div style="font-size:13px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:24px">Unit economics — what makes this viable</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:40px">
+        <div style="background:var(--cream);border-radius:16px;padding:28px">
+          <div style="font-size:14px;font-weight:500;color:var(--muted);margin-bottom:20px">Per user economics</div>
+          <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);font-size:14px"><span style="color:var(--muted)">Trial CAC (digital)</span><span>₹300–400</span></div>
+          <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);font-size:14px"><span style="color:var(--muted)">Trial revenue</span><span>₹199</span></div>
+          <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);font-size:14px"><span style="color:var(--muted)">Trial → paid conversion (target)</span><span style="color:var(--sage-dark);font-weight:500">35%</span></div>
+          <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);font-size:14px"><span style="color:var(--muted)">Avg subscription (blended)</span><span>₹799/mo</span></div>
+          <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);font-size:14px"><span style="color:var(--muted)">Avg retention (target)</span><span>4 months</span></div>
+          <div style="display:flex;justify-content:space-between;padding:12px 0;font-size:15px;font-weight:500"><span>LTV (paid user)</span><span style="color:var(--sage-dark)">₹3,196</span></div>
+          <div style="background:var(--sage-light);border-radius:10px;padding:10px 14px;font-size:12px;color:var(--sage-dark);margin-top:8px">LTV:CAC of ~8:1 at steady state. Payback in under 2 months for paid users.</div>
+        </div>
+
+        <div style="background:var(--cream);border-radius:16px;padding:28px">
+          <div style="font-size:14px;font-weight:500;color:var(--muted);margin-bottom:20px">Per instructor economics</div>
+          <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);font-size:14px"><span style="color:var(--muted)">Sessions per week (active)</span><span>15–20</span></div>
+          <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);font-size:14px"><span style="color:var(--muted)">Avg session value</span><span>₹700</span></div>
+          <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);font-size:14px"><span style="color:var(--muted)">Instructor take (80%)</span><span style="color:var(--sage-dark);font-weight:500">₹560/session</span></div>
+          <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);font-size:14px"><span style="color:var(--muted)">Monthly instructor income</span><span>₹33,600–44,800</span></div>
+          <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);font-size:14px"><span style="color:var(--muted)">Platform take (20%)</span><span>₹8,400–11,200/mo</span></div>
+          <div style="display:flex;justify-content:space-between;padding:12px 0;font-size:15px;font-weight:500"><span>Break-even (instructors)</span><span style="color:var(--clay)">~12 active</span></div>
+          <div style="background:var(--clay-light);border-radius:10px;padding:10px 14px;font-size:12px;color:var(--clay);margin-top:8px">12 active instructors × ₹9,800 avg platform take = ₹1.18L/month. Covers basic ops at city level.</div>
+        </div>
+      </div>
+
+      <!-- Why not just commission or just subscription -->
+      <div style="background:var(--charcoal);border-radius:20px;padding:32px">
+        <div style="font-family:'Playfair Display',serif;font-size:20px;color:white;margin-bottom:24px">Why not just one model?</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+          <div style="background:rgba(255,255,255,0.05);border-radius:12px;padding:20px">
+            <div style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.4);margin-bottom:10px">Commission only</div>
+            <div style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Works in V1 to validate demand. But revenue is volatile — it spikes with bookings, crashes with cancellations. No predictability, hard to plan supply. Doesn't create user habit.</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.05);border-radius:12px;padding:20px">
+            <div style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.4);margin-bottom:10px">Subscription only</div>
+            <div style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">Too high a commitment ask from a new user who hasn't experienced the product. High friction on Day 1. Requires strong brand trust we haven't built yet in tier-2 markets.</div>
+          </div>
+        </div>
+        <div style="margin-top:16px;background:rgba(196,132,90,0.15);border-radius:12px;padding:16px 20px;font-size:14px;color:var(--clay);line-height:1.6">
+          <strong>The hybrid answer:</strong> Commission lowers the barrier and aligns early incentives. Subscription converts proved users into predictable revenue. Freemium trial is the funnel top. Each layer solves the problem the previous layer creates.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SCREEN 6: PM DECISION
+════════════════════════════════════════ -->
+<div id="pmdecision" class="screen">
+  <div style="padding-top:64px">
+
+    <!-- Header -->
+    <div style="background:var(--warm);padding:64px 8% 56px;border-bottom:1px solid var(--border)">
+      <div style="font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--sage-dark);margin-bottom:14px">PM Decision Log</div>
+      <div style="font-family:'Playfair Display',serif;font-size:clamp(26px,3.5vw,42px);color:var(--charcoal);line-height:1.15;max-width:620px;margin-bottom:16px">The decisions that <em>defined</em> the product — and what we gave up to make them</div>
+      <div style="font-size:15px;color:var(--muted);max-width:500px;line-height:1.7">Every PM decision is a tradeoff. This screen shows the three biggest calls made in building PilatesGo — the options considered, the logic used, and what was deliberately left behind.</div>
+    </div>
+
+    <div style="padding:48px 8%;background:white">
+
+      <!-- Decision 1 -->
+      <div style="margin-bottom:40px;border:1px solid var(--border);border-radius:20px;overflow:hidden">
+        <div style="background:var(--sage-light);padding:20px 28px;display:flex;align-items:center;gap:16px">
+          <div style="width:36px;height:36px;background:var(--sage-dark);border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:14px;flex-shrink:0">01</div>
+          <div>
+            <div style="font-family:'Playfair Display',serif;font-size:18px;color:var(--charcoal)">Marketplace vs. Content Platform</div>
+            <div style="font-size:13px;color:var(--muted);margin-top:2px">The most fundamental product architecture decision</div>
+          </div>
+          <div style="margin-left:auto;background:var(--sage-dark);color:white;font-size:11px;font-weight:600;padding:4px 12px;border-radius:100px">Chose Marketplace</div>
+        </div>
+        <div style="padding:28px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+          <div>
+            <div style="font-size:11px;font-weight:600;color:var(--muted);letter-spacing:0.07em;text-transform:uppercase;margin-bottom:10px">Options considered</div>
+            <div style="font-size:13px;color:var(--charcoal);line-height:1.6;background:var(--cream);border-radius:10px;padding:12px">
+              A) Content library — 500 videos, self-serve<br><br>
+              B) Marketplace — real instructors, live sessions<br><br>
+              C) Hybrid — content + occasional live Q&A
+            </div>
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:600;color:var(--sage-dark);letter-spacing:0.07em;text-transform:uppercase;margin-bottom:10px">Why marketplace won</div>
+            <div style="font-size:13px;color:var(--charcoal);line-height:1.6;background:var(--sage-light);border-radius:10px;padding:12px">
+              Content doesn't fix the consistency problem. A library of 500 videos doesn't notice when you disappear on Day 5. A human instructor does.<br><br>
+              Instructors are also a supply-side moat — harder to replicate than content.
+            </div>
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:600;color:var(--clay);letter-spacing:0.07em;text-transform:uppercase;margin-bottom:10px">What we gave up</div>
+            <div style="font-size:13px;color:var(--charcoal);line-height:1.6;background:var(--clay-light);border-radius:10px;padding:12px">
+              Scalability. Content scales to millions at near-zero marginal cost. Marketplace is constrained by instructor supply and availability.<br><br>
+              We accepted this tradeoff consciously — consistency beats scale at MVP stage.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Decision 2 -->
+      <div style="margin-bottom:40px;border:1px solid var(--border);border-radius:20px;overflow:hidden">
+        <div style="background:var(--clay-light);padding:20px 28px;display:flex;align-items:center;gap:16px">
+          <div style="width:36px;height:36px;background:var(--clay);border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:14px;flex-shrink:0">02</div>
+          <div>
+            <div style="font-family:'Playfair Display',serif;font-size:18px;color:var(--charcoal)">4-Week Program vs. Drop-in Classes</div>
+            <div style="font-size:13px;color:var(--muted);margin-top:2px">How to structure the user's engagement with the product</div>
+          </div>
+          <div style="margin-left:auto;background:var(--clay);color:white;font-size:11px;font-weight:600;padding:4px 12px;border-radius:100px">Chose Programs</div>
+        </div>
+        <div style="padding:28px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+          <div>
+            <div style="font-size:11px;font-weight:600;color:var(--muted);letter-spacing:0.07em;text-transform:uppercase;margin-bottom:10px">Options considered</div>
+            <div style="font-size:13px;color:var(--charcoal);line-height:1.6;background:var(--cream);border-radius:10px;padding:12px">
+              A) Drop-in — book any class, any instructor, any time<br><br>
+              B) 4-week programs — enrolled, same instructor, progressive<br><br>
+              C) Weekly subscription with flexible scheduling
+            </div>
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:600;color:var(--sage-dark);letter-spacing:0.07em;text-transform:uppercase;margin-bottom:10px">Why programs won</div>
+            <div style="font-size:13px;color:var(--charcoal);line-height:1.6;background:var(--sage-light);border-radius:10px;padding:12px">
+              Retention is the real problem, not discovery. Programs create a commitment device — you're enrolled in Week 3, not browsing for a class.<br><br>
+              Same instructor builds trust and form familiarity. Drop-in destroys both.
+            </div>
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:600;color:var(--clay);letter-spacing:0.07em;text-transform:uppercase;margin-bottom:10px">What we gave up</div>
+            <div style="font-size:13px;color:var(--charcoal);line-height:1.6;background:var(--clay-light);border-radius:10px;padding:12px">
+              Flexibility. Some users want to try different instructors or styles. Programs lock them in.<br><br>
+              We decided: flexibility is what keeps people in YouTube. Structure is what PilatesGo offers that YouTube can't.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Decision 3 -->
+      <div style="margin-bottom:40px;border:1px solid var(--border);border-radius:20px;overflow:hidden">
+        <div style="background:rgba(44,44,44,0.06);padding:20px 28px;display:flex;align-items:center;gap:16px">
+          <div style="width:36px;height:36px;background:var(--charcoal);border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:14px;flex-shrink:0">03</div>
+          <div>
+            <div style="font-family:'Playfair Display',serif;font-size:18px;color:var(--charcoal)">Skip AI Form Correction in V1</div>
+            <div style="font-size:13px;color:var(--muted);margin-top:2px">The most tempting feature to build — and why we didn't</div>
+          </div>
+          <div style="margin-left:auto;background:var(--charcoal);color:white;font-size:11px;font-weight:600;padding:4px 12px;border-radius:100px">Deferred to V3</div>
+        </div>
+        <div style="padding:28px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+          <div>
+            <div style="font-size:11px;font-weight:600;color:var(--muted);letter-spacing:0.07em;text-transform:uppercase;margin-bottom:10px">The temptation</div>
+            <div style="font-size:13px;color:var(--charcoal);line-height:1.6;background:var(--cream);border-radius:10px;padding:12px">
+              AI camera-based form correction sounds like the obvious differentiator. Computer vision detects wrong posture in real time. Technically exciting.<br><br>
+              Every PM in the room wants to build it.
+            </div>
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:600;color:var(--sage-dark);letter-spacing:0.07em;text-transform:uppercase;margin-bottom:10px">Why we said no in V1</div>
+            <div style="font-size:13px;color:var(--charcoal);line-height:1.6;background:var(--sage-light);border-radius:10px;padding:12px">
+              The riskiest assumption wasn't tech — it was willingness to pay. We needed to validate that first.<br><br>
+              AI form correction is expensive to build, easy to get wrong, and hard to trust for postpartum users where injury risk is real.
+            </div>
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:600;color:var(--clay);letter-spacing:0.07em;text-transform:uppercase;margin-bottom:10px">When we'd build it</div>
+            <div style="font-size:13px;color:var(--charcoal);line-height:1.6;background:var(--clay-light);border-radius:10px;padding:12px">
+              V3 — once we have 6 months of session data and user trust established.<br><br>
+              By then instructors have collected form data, users trust the brand, and we can validate AI corrections against real instructor feedback before shipping.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Metrics tied to decisions -->
+      <div style="background:var(--charcoal);border-radius:20px;padding:32px">
+        <div style="font-family:'Playfair Display',serif;font-size:20px;color:white;margin-bottom:8px">How we'd know if these decisions were right</div>
+        <div style="font-size:14px;color:rgba(255,255,255,0.4);margin-bottom:28px">Each decision has a metric that would prove or disprove it within 90 days</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
+          <div style="background:rgba(255,255,255,0.06);border-radius:14px;padding:20px">
+            <div style="font-size:12px;color:rgba(255,255,255,0.35);margin-bottom:8px">Decision 01 validates if...</div>
+            <div style="font-size:14px;color:white;line-height:1.6">Instructor-matched users show 2× repeat rate vs self-browse users</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.06);border-radius:14px;padding:20px">
+            <div style="font-size:12px;color:rgba(255,255,255,0.35);margin-bottom:8px">Decision 02 validates if...</div>
+            <div style="font-size:14px;color:white;line-height:1.6">Week 4 program completion rate exceeds 60% of enrolled users</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.06);border-radius:14px;padding:20px">
+            <div style="font-size:12px;color:rgba(255,255,255,0.35);margin-bottom:8px">Decision 03 validates if...</div>
+            <div style="font-size:14px;color:white;line-height:1.6">Users cite "instructor feedback" not "AI correction" as top retention reason in exit surveys</div>
+          </div>
+          <div style="background:rgba(196,132,90,0.15);border-radius:14px;padding:20px">
+            <div style="font-size:12px;color:var(--clay);margin-bottom:8px">North Star validates all three if...</div>
+            <div style="font-size:14px;color:white;line-height:1.6">Weekly active learners completing 2 sessions/week crosses 60% at Month 2</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
